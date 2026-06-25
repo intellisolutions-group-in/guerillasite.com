@@ -62,7 +62,7 @@ export default function Page() {
                 <div className="flex flex-col gap-md relative z-10">
                   <div>
                     <p className="font-label-sm text-label-sm text-on-surface-variant mb-xs">Founded</p>
-                    <p className="font-display text-3xl font-extrabold text-primary">2004</p>
+                    <p className="font-display text-3xl font-extrabold text-primary">2012</p>
                   </div>
                   <div className="h-[1px] bg-neutral-200/40 w-full"></div>
                   <div>
@@ -171,14 +171,14 @@ export default function Page() {
           <div className="max-w-3xl mb-xxl gsap-slide-up relative z-10">
             <span className="font-label-sm text-label-sm text-on-surface-variant block mb-sm">03 // Our History</span>
             <h2 className="font-display text-3xl font-extrabold uppercase text-primary tracking-tight">Engineering Milestones</h2>
-            <p className="font-sans text-body-md text-on-surface-variant mt-xs">Two decades of constructing deterministic systems, scaling infrastructure, and establishing global engineering nodes.</p>
+            <p className="font-sans text-body-md text-on-surface-variant mt-xs">Over a decade of constructing deterministic systems, scaling infrastructure, and establishing global engineering nodes.</p>
           </div>
 
           <div className="relative border-l-[3px] border-neutral-200/60 ml-4 md:ml-8 pl-8 md:pl-12 py-4 space-y-xl z-10">
             {[
-              { year: "2004", title: "Systems Foundation", desc: "GuerillaSite is established, specializing in high-availability UNIX server clustering and redundant datacenter design.", icon: "home" },
-              { year: "2009", title: "DevOps & Cloud Acceleration", desc: "Expanded DevOps operations. Built our first Kubernetes cluster automation systems and type-safe API gateways for logistics clients.", icon: "cloud_done" },
-              { year: "2014", title: "IIoT Twin Division", desc: "Launched predictive telemetry pipelines for heavy manufacturing plants, syncing over 50,000 active Edge nodes to dynamic timeseries databases.", icon: "precision_manufacturing" },
+              { year: "2012", title: "Systems Foundation", desc: "GuerillaSite is established, specializing in high-availability UNIX server clustering and redundant datacenter design.", icon: "home" },
+              { year: "2015", title: "DevOps & Cloud Acceleration", desc: "Expanded DevOps operations. Built our first Kubernetes cluster automation systems and type-safe API gateways for logistics clients.", icon: "cloud_done" },
+              { year: "2018", title: "IIoT Twin Division", desc: "Launched predictive telemetry pipelines for heavy manufacturing plants, syncing over 50,000 active Edge nodes to dynamic timeseries databases.", icon: "precision_manufacturing" },
               { year: "2024", title: "Active-Active Global Scale", desc: "Deployed synchronous multi-region, zero-data-loss databases across our network, running under sub-45ms SLA response bounds.", icon: "public" }
             ].map((milestone, idx) => (
               <div key={idx} className="relative group gsap-slide-up">

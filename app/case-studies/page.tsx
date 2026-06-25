@@ -21,10 +21,10 @@ export default function Page() {
                 Real-world case studies detailing how we resolve complex architectural bottlenecks, implement scalable cloud strategies, and drive measurable ROI for global enterprises.
             </p>
 <div className="flex flex-wrap gap-md">
-<button className="gsap-hero-animate btn-accent font-label-sm text-label-sm uppercase flex items-center gap-xs">
-<span className="material-symbols-outlined text-sm" data-icon="download">download</span>
-                    Download 2024 Impact Report
-                </button>
+<Link className="gsap-hero-animate btn-accent font-label-sm text-label-sm uppercase flex items-center gap-xs" href="/contact">
+<span className="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+                    Request 2024 Impact Report
+                </Link>
 </div>
 </header>
 

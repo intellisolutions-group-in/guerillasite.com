@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
@@ -32,10 +32,10 @@ export default function Page() {
                   Consult with our Architects
                   <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </Link>
-                <button className="btn-ghost flex items-center gap-sm w-fit">
-                  <span className="material-symbols-outlined text-[16px]">download</span>
-                  Download Architecture Spec
-                </button>
+                <Link className="btn-ghost flex items-center gap-sm w-fit" href="/contact">
+                  <span className="material-symbols-outlined text-[16px]">mail</span>
+                  Request Architecture Spec
+                </Link>
               </div>
             </div>
           </div>

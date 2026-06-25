@@ -113,7 +113,7 @@ const domainVerticals = [
     image: "/images/systems_architect_board.png",
     themeColor: "text-secondary",
     desc: "Deploying deterministic ledger architectures capable of handling 100k+ TPS with synchronous audit trails and risk-mitigation layers.",
-    features: ["Double-entry ledger engines", "PCI-DSS compliance pipelines", "Anti-money laundering detection engines"],
+    features: ["Double-entry ledger engines", "Secure payment pipelines", "Anti-money laundering detection engines"],
     link: "/industries/fintech"
   },
   {
@@ -121,7 +121,7 @@ const domainVerticals = [
     metric: "FHIR-Compliant Secure Mesh",
     image: "/images/systems_architect.png",
     themeColor: "text-[#D3DDE7]",
-    desc: "Unifying legacy healthcare databases into encrypted, HIPAA-compliant patient record meshes with granular telemetry.",
+    desc: "Unifying legacy healthcare databases into encrypted, secure patient record meshes with granular telemetry.",
     features: ["End-to-end payload encryption", "HL7 / FHIR compatibility integrations", "Audit-trail validation logs"],
     link: "/industries/healthcare"
   },
@@ -993,20 +993,20 @@ export default function Page() {
             {[
               {
                 text: "GuerillaSite re-architected our legacy financial ledger system from scratch. Their systems engineering team brought total clarity, delivering sub-2ms ledger reconciliations under extreme concurrent load limits.",
-                author: "Marcus Vance",
-                role: "Director of Core Platforms, CapitalUnion",
+                author: "Amit Sharma",
+                role: "Director of Core Platforms",
                 gradient: "from-[#D8E63C]/10 to-transparent"
               },
               {
                 text: "Their zero-trust integration framework was flawless. They mapped our entire healthcare mesh securely, implementing complete FHIR compliancy loops while pruning operational server latency by over 30%.",
-                author: "Sarah Jenkins",
-                role: "VP of Technical Architecture, HealthVitals Network",
+                author: "Priya Nair",
+                role: "VP of Technical Architecture",
                 gradient: "from-[#D3DDE7]/20 to-transparent"
               },
               {
                 text: "The telemetry warning dashboard is brilliant. We now identify memory allocation spikes and database lock vectors minutes before they threaten production SLAs. Exceptional execution.",
-                author: "Dieter Meyer",
-                role: "Lead DevOps Specialist, Autologistics GmbH",
+                author: "Rahul Verma",
+                role: "Lead DevOps Specialist",
                 gradient: "from-[#D8E63C]/10 to-transparent"
               }
             ].map((test, index) => {

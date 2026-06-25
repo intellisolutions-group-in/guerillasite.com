@@ -4,8 +4,8 @@ import ServicePageTemplate from "@/components/sections/ServicePageTemplate";
 export default function Page() {
   const stats = [
   {
-    "label": "PCI Compliance",
-    "value": "Level 1"
+    "label": "Payment Security",
+    "value": "High-Grade"
   },
   {
     "label": "Transaction Uptime",
@@ -26,13 +26,13 @@ export default function Page() {
     "desc": "Lack of 3D-Secure and card scanning exposes portals to fraud charges."
   },
   {
-    "title": "PCI DSS Compliance Bloat",
+    "title": "Payment Security Risks",
     "desc": "Handling card raw numbers directly exposes databases to security leaks."
   }
 ];
   const methodology = {
-  "title": "PCI-Compliant Payment Pipelines",
-  "desc": "We build payment systems that isolate sensitive card logs from your servers.\n\nBy leveraging secure tokenization (Stripe/Adyen) and hosting on micro-segmented servers, we secure financial data and reduce audit workloads.",
+  "title": "Secure Payment Pipelines",
+  "desc": "We build payment systems that isolate sensitive card logs from your servers.\n\nBy leveraging secure tokenization (Stripe/Adyen) and hosting on micro-segmented servers, we secure financial data and reduce security risks.",
   "image": "/images/cloud_ops_engineer.png"
 };
   const capabilities = [
@@ -69,8 +69,8 @@ export default function Page() {
   const workflow = [
   {
     "step": "A",
-    "title": "Compliance Audit",
-    "desc": "Review transaction schemas and check PCI scope requirements."
+    "title": "Security Audit",
+    "desc": "Review transaction schemas and check data security requirements."
   },
   {
     "step": "B",
@@ -90,7 +90,7 @@ export default function Page() {
 ];
   const faqs = [
   {
-    "question": "How do you handle PCI DSS compliance?",
+    "question": "How do you handle payment card security?",
     "answer": "We use hosted fields or elements. Raw credit card data never touches your databases, minimizing security audits."
   },
   {

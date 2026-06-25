@@ -20,8 +20,8 @@ export default function Page() {
                     </p>
 <div className="flex gap-md">
 <Link className="gsap-hero-animate btn-accent gap-sm" href="/contact">
-<span className="material-symbols-outlined" style={{fontVariationSettings: '"FILL" 1'}}>download</span>
-                            Download PDF
+<span className="material-symbols-outlined" style={{fontVariationSettings: '"FILL" 1'}}>mail</span>
+                            Request Whitepaper
                         </Link>
 <Link className="btn-ghost" href="/contact">
                             Read Abstract
@@ -122,7 +122,7 @@ export default function Page() {
 <h3 className="font-headline-md text-headline-md text-[24px] mb-sm group-hover:text-secondary transition-colors">Zero-Trust Security Implementation Checklist</h3>
 <p className="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow line-clamp-4">A practical, step-by-step checklist for establishing a zero-trust architecture across distributed teams and hybrid cloud environments.</p>
 <Link className="btn-ghost w-full gap-sm mt-auto flex items-center justify-center" href="/contact">
-<span className="material-symbols-outlined text-[16px]">download</span> PDF (2.4MB)
+<span className="material-symbols-outlined text-[16px]">mail</span> Request Checklist
                             </Link>
 </div>
 </article>
@@ -133,7 +133,7 @@ export default function Page() {
 <span className="inline-block border-2 border-[#17184B] px-sm py-xs font-label-sm text-label-sm uppercase mb-md w-max bg-surface rounded-[4px]">Whitepaper</span>
 <h3 className="font-headline-md text-headline-md text-[24px] mb-sm group-hover:text-secondary transition-colors">The Cost Analysis of Serverless Architectures</h3>
 <p className="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">An extensive comparative study detailing hidden costs, scaling economies, and break-even points between traditional cloud hosting and serverless functions.</p>
-<Link className="text-primary font-label-sm text-label-sm uppercase tracking-widest border-b-2 border-transparent hover:border-secondary transition-colors w-max mt-auto" href="/contact">Download Report</Link>
+<Link className="text-primary font-label-sm text-label-sm uppercase tracking-widest border-b-2 border-transparent hover:border-secondary transition-colors w-max mt-auto" href="/contact">Request Report</Link>
 </div>
 </article>
 
