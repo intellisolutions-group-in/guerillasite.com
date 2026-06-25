@@ -46,41 +46,19 @@ export default function Page() {
           <div className="absolute top-1/2 left-1/4 w-[300px] h-[300px] bg-[#D8E63C]/5 rounded-full filter blur-[100px] pointer-events-none -z-10"></div>
           <div className="absolute bottom-1/2 right-1/4 w-[350px] h-[350px] bg-[#D3DDE7]/10 rounded-full filter blur-[80px] pointer-events-none -z-10"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-xl">
-            <div className="card-neumorphic p-xl flex flex-col justify-between min-h-[240px] transition-all duration-300 text-primary bg-white/70 backdrop-blur-sm border border-neutral-200/40 rounded-[32px] shadow-md hover:shadow-lg hover:-translate-y-0.5">
+          <div className="flex justify-center w-full">
+            <div className="card-neumorphic p-xl flex flex-col justify-between min-h-[240px] max-w-md w-full transition-all duration-300 text-primary bg-white/70 backdrop-blur-sm border border-neutral-200/40 rounded-[32px] shadow-md hover:shadow-lg hover:-translate-y-0.5">
               <div>
                 <div className="flex items-center mb-md border-b border-neutral-200/30 pb-xs">
-                  <span className="material-symbols-outlined mr-sm text-secondary">storefront</span>
-                  <h3 className="font-sans text-xs uppercase tracking-widest text-on-surface-variant font-bold">Enterprise Sales</h3>
+                  <span className="material-symbols-outlined mr-sm text-secondary">mail</span>
+                  <h3 className="font-sans text-xs uppercase tracking-widest text-on-surface-variant font-bold">Inquiries & Support</h3>
                 </div>
-                <p className="font-display text-xl font-bold uppercase text-[#17184B] mb-sm">Partner</p>
-                <p className="font-sans text-xs text-on-surface-variant mb-lg leading-relaxed">Discuss architectural strategy and platform integration for your organization.</p>
+                <p className="font-display text-xl font-bold uppercase text-[#17184B] mb-sm">Contact Email</p>
+                <p className="font-sans text-xs text-on-surface-variant mb-lg leading-relaxed">
+                  For enterprise sales, technical support, or career inquiries, connect directly with our engineering team.
+                </p>
               </div>
               <a className="font-sans text-xs uppercase tracking-widest text-[#17184B] border-b border-neutral-300 hover:text-secondary hover:border-secondary pb-0.5 inline-block font-bold transition-all w-fit" href="mailto:info@guerillasite.com">info@guerillasite.com</a>
-            </div>
-
-            <div className="card-neumorphic p-xl flex flex-col justify-between min-h-[240px] transition-all duration-300 text-primary bg-white/70 backdrop-blur-sm border border-neutral-200/40 rounded-[32px] shadow-md hover:shadow-lg hover:-translate-y-0.5">
-              <div>
-                <div className="flex items-center mb-md border-b border-neutral-200/30 pb-xs">
-                  <span className="material-symbols-outlined mr-sm text-secondary">support_agent</span>
-                  <h3 className="font-sans text-xs uppercase tracking-widest text-on-surface-variant font-bold">Technical Support</h3>
-                </div>
-                <p className="font-display text-xl font-bold uppercase text-[#17184B] mb-sm">Resolve</p>
-                <p className="font-sans text-xs text-on-surface-variant mb-lg leading-relaxed">24/7 access to tier-3 engineering support for critical infrastructure issues.</p>
-              </div>
-              <a className="font-sans text-xs uppercase tracking-widest text-[#17184B] border-b border-neutral-300 hover:text-secondary hover:border-secondary pb-0.5 inline-block font-bold transition-all w-fit" href="mailto:info@guerillasite.com">info@guerillasite.com</a>
-            </div>
-
-            <div className="card-neumorphic p-xl flex flex-col justify-between min-h-[240px] transition-all duration-300 text-primary bg-white/70 backdrop-blur-sm border border-neutral-200/40 rounded-[32px] shadow-md hover:shadow-lg hover:-translate-y-0.5">
-              <div>
-                <div className="flex items-center mb-md border-b border-neutral-200/30 pb-xs">
-                  <span className="material-symbols-outlined mr-sm text-secondary">work</span>
-                  <h3 className="font-sans text-xs uppercase tracking-widest text-on-surface-variant font-bold">Careers</h3>
-                </div>
-                <p className="font-display text-xl font-bold uppercase text-[#17184B] mb-sm">Join</p>
-                <p className="font-sans text-xs text-on-surface-variant mb-lg leading-relaxed">Explore opportunities to build scalable systems with our engineering team.</p>
-              </div>
-              <Link className="font-sans text-xs uppercase tracking-widest text-[#17184B] border-b border-neutral-300 hover:text-secondary hover:border-secondary pb-0.5 inline-block font-bold transition-all w-fit" href="/careers">View Open Roles</Link>
             </div>
           </div>
         </section>
