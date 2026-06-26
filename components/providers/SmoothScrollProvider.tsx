@@ -19,10 +19,11 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     // Initialize Lenis with native RAF disabled to drive via GSAP ticker
     const lenis = new Lenis({
       autoRaf: false,
-      lerp: 0.07, // Smoother cinematic scroll interpolation
+      lerp: 0.1, // Faster, more responsive smooth scroll feel
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
+      syncTouch: false, // Use native touch inertia on mobile to prevent jank/jitter
       wheelMultiplier: 1.0,
       touchMultiplier: 1.2,
     });
@@ -44,6 +45,33 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     // Disable lag smoothing to keep scrolling synchronized under load
     gsap.ticker.lagSmoothing(0);
 
+    // Global smooth scroll handler for all anchor links (e.g. #milestones)
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          lenis.scrollTo(targetElement as HTMLElement, { offset: -90, duration: 1.2 });
+        }
+      } else if (href && href.includes("#")) {
+        const [path, hash] = href.split("#");
+        if (path === window.location.pathname) {
+          e.preventDefault();
+          const targetElement = document.querySelector(`#${hash}`);
+          if (targetElement) {
+            lenis.scrollTo(targetElement as HTMLElement, { offset: -90, duration: 1.2 });
+          }
+        }
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+
     return () => {
       lenis.destroy();
       lenisRef.current = null;
@@ -52,6 +80,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
         delete (window as any).lenis;
       }
       gsap.ticker.remove(updateLenis);
+      document.removeEventListener("click", handleAnchorClick);
     };
   }, []);
 
@@ -239,25 +268,15 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     }
     ScrollTrigger.refresh();
 
-    // Staggered layout-settle timers to account for asynchronous component/image rendering shifts
+    // Single layout-settle timer to account for asynchronous component/image rendering shifts
     const t1 = setTimeout(() => {
       if (lenisRef.current) lenisRef.current.resize();
       ScrollTrigger.refresh();
-    }, 400);
-    const t2 = setTimeout(() => {
-      if (lenisRef.current) lenisRef.current.resize();
-      ScrollTrigger.refresh();
-    }, 1000);
-    const t3 = setTimeout(() => {
-      if (lenisRef.current) lenisRef.current.resize();
-      ScrollTrigger.refresh();
-    }, 2200);
+    }, 250);
 
     return () => {
       if (ctx) ctx.revert();
       clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
     };
   }, [pathname]);
 

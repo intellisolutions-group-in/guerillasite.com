@@ -187,131 +187,133 @@ export default function Page() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const mm = gsap.matchMedia();
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
 
-    // Desktop: Active step highlighting + overlapping stacked transitions
-    mm.add("(min-width: 1024px)", () => {
-      processStages.forEach((stage, idx) => {
-        // Active indicator on scroll
-        ScrollTrigger.create({
-          trigger: `#step-card-${idx}`,
-          start: "top 220px",
-          end: "bottom 220px",
-          onToggle: (self) => {
-            if (self.isActive) {
+      // Desktop: Active step highlighting + overlapping stacked transitions
+      mm.add("(min-width: 1024px)", () => {
+        processStages.forEach((stage, idx) => {
+          // Active indicator on scroll
+          ScrollTrigger.create({
+            trigger: `#step-card-${idx}`,
+            start: "top 220px",
+            end: "bottom 220px",
+            onToggle: (self) => {
+              if (self.isActive) {
+                setActiveStep(idx);
+              }
+            },
+            onEnterBack: () => {
               setActiveStep(idx);
             }
-          },
-          onEnterBack: () => {
-            setActiveStep(idx);
+          });
+
+          // Layered overlapping animation: scale down and fade previous card as next card enters
+          if (idx < processStages.length - 1) {
+            gsap.to(`#step-card-${idx}`, {
+              scrollTrigger: {
+                trigger: `#step-card-${idx + 1}`,
+                start: "top 95%",
+                end: "top 180px",
+                scrub: true,
+              },
+              opacity: 0.15,
+              scale: 0.9,
+              y: -50,
+              ease: "none"
+            });
           }
         });
 
-        // Layered overlapping animation: scale down and fade previous card as next card enters
-        if (idx < processStages.length - 1) {
-          gsap.to(`#step-card-${idx}`, {
+        // Case Studies: Horizontal Scroll Pinning & Translation Animation
+        const pinContainer = horizontalTriggerRef.current;
+        const scrollContainer = horizontalScrollRef.current;
+        if (pinContainer && scrollContainer) {
+          gsap.to(scrollContainer, {
+            x: () => -(scrollContainer.scrollWidth - window.innerWidth),
+            ease: "none",
             scrollTrigger: {
-              trigger: `#step-card-${idx + 1}`,
-              start: "top 95%",
-              end: "top 180px",
-              scrub: true,
-            },
-            opacity: 0.15,
-            scale: 0.9,
-            y: -50,
-            ease: "none"
+              trigger: pinContainer,
+              pin: true,
+              scrub: 1,
+              start: "top top",
+              end: () => `+=${scrollContainer.scrollWidth - window.innerWidth}`,
+              invalidateOnRefresh: true,
+              anticipatePin: 1
+            }
           });
         }
       });
 
-      // Case Studies: Horizontal Scroll Pinning & Translation Animation
-      const pinContainer = horizontalTriggerRef.current;
-      const scrollContainer = horizontalScrollRef.current;
-      if (pinContainer && scrollContainer) {
-        gsap.to(scrollContainer, {
-          x: () => -(scrollContainer.scrollWidth - window.innerWidth),
-          ease: "none",
-          scrollTrigger: {
-            trigger: pinContainer,
-            pin: true,
-            scrub: 1,
-            start: "top top",
-            end: () => `+=${scrollContainer.scrollWidth - window.innerWidth}`,
-            invalidateOnRefresh: true,
-            anticipatePin: 1
-          }
-        });
-      }
-    });
-
-    // Industries: Split Screen Active Indicator Scroll Trigger (All viewports)
-    const industryCards = gsap.utils.toArray(".gsap-industry-card") as Element[];
-    industryCards.forEach((card, idx: number) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top 350px",
-        end: "bottom 350px",
-        onToggle: (self) => {
-          if (self.isActive) {
-            setActiveIndustry(idx);
-          }
-        },
-        onEnterBack: () => {
-          setActiveIndustry(idx);
-        }
-      });
-    });
-
-    // Mobile: Highlight vertical card as it enters focus
-    mm.add("(max-width: 1023px)", () => {
-      processStages.forEach((stage, idx) => {
+      // Industries: Split Screen Active Indicator Scroll Trigger (All viewports)
+      const industryCards = gsap.utils.toArray(".gsap-industry-card") as Element[];
+      industryCards.forEach((card, idx: number) => {
         ScrollTrigger.create({
-          trigger: `#step-card-${idx}`,
-          start: "top 40%",
-          end: "bottom 40%",
+          trigger: card,
+          start: "top 350px",
+          end: "bottom 350px",
           onToggle: (self) => {
             if (self.isActive) {
-              setActiveStep(idx);
+              setActiveIndustry(idx);
             }
           },
           onEnterBack: () => {
-            setActiveStep(idx);
+            setActiveIndustry(idx);
           }
         });
       });
-    });
 
-    // Animate hero text on enter
-    const tl = gsap.timeline();
-    tl.fromTo(
-      ".hero-fade-in",
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1.2, stagger: 0.2, ease: "power4.out" }
-    );
-
-    // Scroll Text Reveal Animation
-    const revealContainer = revealTextRef.current;
-    if (revealContainer) {
-      const items = revealContainer.querySelectorAll(".reveal-item");
-      gsap.to(items, {
-        scrollTrigger: {
-          trigger: revealContainer,
-          start: "top 75%",
-          end: "bottom 35%",
-          scrub: true,
-        },
-        opacity: 1,
-        stagger: 0.05,
-        duration: 0.001,
-        ease: "none",
+      // Mobile: Highlight vertical card as it enters focus
+      mm.add("(max-width: 1023px)", () => {
+        processStages.forEach((stage, idx) => {
+          ScrollTrigger.create({
+            trigger: `#step-card-${idx}`,
+            start: "top 40%",
+            end: "bottom 40%",
+            onToggle: (self) => {
+              if (self.isActive) {
+                setActiveStep(idx);
+              }
+            },
+            onEnterBack: () => {
+              setActiveStep(idx);
+            }
+          });
+        });
       });
-    }
+
+      // Animate hero text on enter
+      const tl = gsap.timeline();
+      tl.fromTo(
+        ".hero-fade-in",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2, stagger: 0.2, ease: "power4.out" }
+      );
+
+      // Scroll Text Reveal Animation
+      const revealContainer = revealTextRef.current;
+      if (revealContainer) {
+        const items = revealContainer.querySelectorAll(".reveal-item");
+        gsap.to(items, {
+          scrollTrigger: {
+            trigger: revealContainer,
+            start: "top 75%",
+            end: "bottom 35%",
+            scrub: true,
+          },
+          opacity: 1,
+          stagger: 0.05,
+          duration: 0.001,
+          ease: "none",
+        });
+      }
+    });
 
     // Refresh ScrollTrigger to calculate correct bounds after component mount
     ScrollTrigger.refresh();
 
     return () => {
-      mm.revert();
+      ctx.revert();
     };
   }, []);
 

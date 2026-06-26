@@ -31,7 +31,7 @@
   --color-neutral-border: #17184B;
 
   --font-sans: var(--font-plus-jakarta);
-  --font-display: var(--font-syne);
+  --font-display: var(--font-plus-jakarta);
   --font-serif: var(--font-playfair);
   --font-header: var(--font-space-grotesk);
   --font-mono: var(--font-share-tech-mono);
@@ -347,7 +347,7 @@ html.lenis, html.lenis body {
 }
 
 .font-display-lg, .text-display-lg, .text-display-lg-mobile {
-  font-family: var(--font-syne), sans-serif;
+  font-family: var(--font-plus-jakarta), sans-serif;
   font-size: 72px;
   font-weight: 800;
   line-height: 0.95;
@@ -356,7 +356,7 @@ html.lenis, html.lenis body {
 }
 
 .font-headline-xl, .text-headline-xl {
-  font-family: var(--font-syne), sans-serif;
+  font-family: var(--font-plus-jakarta), sans-serif;
   font-size: 52px;
   font-weight: 800;
   line-height: 1.05;
@@ -533,8 +533,19 @@ html.lenis, html.lenis body {
   border: none;
   position: relative;
   z-index: 1;
+}/* Scroll Performance & Smoothness Optimizations */
+.gsap-slide-up,
+.gsap-fade-in,
+.gsap-scale-in,
+.timeline-card,
+.timeline-icon-circle,
+.timeline-year,
+.gsap-stagger-item {
+  will-change: transform, opacity;
 }
 
-
-
-
+/* Off-screen rendering optimizations (skips layout & paint cycles for off-screen components) */
+.optimize-scrolling-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}

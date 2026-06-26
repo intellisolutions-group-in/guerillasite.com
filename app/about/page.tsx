@@ -33,85 +33,77 @@ export default function Page() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animate the vertical timeline line height
-    gsap.fromTo(
-      ".timeline-progress-line",
-      { height: "0%" },
-      {
-        height: "100%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".timeline-container",
-          start: "top 60%",
-          end: "bottom 70%",
-          scrub: true,
-        },
-      }
-    );
+    const ctx = gsap.context(() => {
+      // Animate the vertical timeline line height
+      gsap.fromTo(
+        ".timeline-progress-line",
+        { height: "0%" },
+        {
+          height: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".timeline-container",
+            start: "top 60%",
+            end: "bottom 70%",
+            scrub: 0.5,
+          },
+        }
+      );
 
-    // Animate each milestone row as it enters the viewport
-    const items = document.querySelectorAll(".timeline-item");
-    items.forEach((item) => {
-      const yearTags = item.querySelectorAll(".timeline-year");
-      const iconCircle = item.querySelector(".timeline-icon-circle");
-      const card = item.querySelector(".timeline-card");
+      // Animate each milestone row as it enters the viewport
+      const items = document.querySelectorAll(".timeline-item");
+      items.forEach((item) => {
+        const yearTags = item.querySelectorAll(".timeline-year");
+        const iconCircle = item.querySelector(".timeline-icon-circle");
+        const card = item.querySelector(".timeline-card");
 
-      if (yearTags.length > 0 && iconCircle && card) {
-        // Animate year tags: scale-in and fade-in
-        gsap.fromTo(
-          yearTags,
-          { scale: 0.3, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.6,
-            ease: "back.out(1.5)",
+        if (yearTags.length > 0 && iconCircle && card) {
+          const tl = gsap.timeline({
             scrollTrigger: {
               trigger: item,
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
-        );
+          });
 
-        // Animate icon circle: scale-in and rotate
-        gsap.fromTo(
-          iconCircle,
-          { scale: 0, rotation: -60 },
-          {
-            scale: 1,
-            rotation: 0,
-            duration: 0.6,
-            ease: "back.out(1.5)",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
+          tl.fromTo(
+            yearTags,
+            { scale: 0.3, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.5,
+              ease: "back.out(1.5)",
+            }
+          )
+          .fromTo(
+            iconCircle,
+            { scale: 0, rotation: -60 },
+            {
+              scale: 1,
+              rotation: 0,
+              duration: 0.5,
+              ease: "back.out(1.5)",
             },
-          }
-        );
-
-        // Animate card: slide-in from right
-        gsap.fromTo(
-          card,
-          { x: 50, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 83%",
-              toggleActions: "play none none reverse",
+            "<"
+          )
+          .fromTo(
+            card,
+            { x: 30, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.6,
+              ease: "power2.out",
             },
-          }
-        );
-      }
+            "-=0.3"
+          );
+        }
+      });
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ctx.revert();
     };
   }, []);
 
@@ -126,7 +118,7 @@ export default function Page() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#D8E63C]/10 rounded-full filter blur-[120px] pointer-events-none animate-pulse duration-[10000ms] -z-10"></div>
           <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] bg-[#D3DDE7]/25 rounded-full filter blur-[90px] pointer-events-none -z-10"></div>
           
-          <div className="gsap-stagger-container grid grid-cols-1 lg:grid-cols-12 gap-huge items-center z-10 relative">
+          <div className="about-hero-container grid grid-cols-1 lg:grid-cols-12 gap-huge items-center z-10 relative">
             <div className="col-span-12 lg:col-span-7 flex flex-col justify-center animate-in fade-in slide-in-from-left duration-700">
               <p className="gsap-hero-animate font-label-sm text-label-sm text-on-surface-variant mb-md">Our Purpose</p>
               <h1 className="gsap-hero-animate font-display text-4xl md:text-5xl lg:text-display-lg uppercase font-extrabold tracking-tight text-primary mb-lg leading-[1.05]">
@@ -136,7 +128,7 @@ export default function Page() {
                 We don't just solve problems; we architect resilient systems. GuerillaSite exists to bridge the gap between complex technical debt and streamlined, future-proof operational excellence.
               </p>
               
-              <div className="flex flex-wrap gap-md mt-xl">
+              <div className="gsap-hero-animate flex flex-wrap gap-md mt-xl">
                 <Link href="/contact" className="btn-accent px-8 py-4 text-xs font-bold uppercase tracking-widest text-center shadow-md">
                   Consult with our Architects
                 </Link>
@@ -149,7 +141,7 @@ export default function Page() {
             
             <div className="col-span-12 lg:col-span-5 flex items-center justify-center mt-xl lg:mt-0 animate-in fade-in slide-in-from-right duration-700 w-full">
               <div 
-                className="gsap-stagger-item border-2 border-[#17184B] bg-[#17184B]/5 p-md w-full relative rounded-[32px] shadow-2xl overflow-hidden cursor-pointer backdrop-blur-sm group transition-all duration-300"
+                className="gsap-scale-in border-2 border-[#17184B] bg-[#17184B]/5 p-md w-full relative rounded-[32px] shadow-2xl overflow-hidden cursor-pointer backdrop-blur-sm group transition-all duration-300"
                 onMouseMove={handleCardMouseMove}
                 onMouseLeave={handleCardMouseLeave}
               >
@@ -312,24 +304,27 @@ export default function Page() {
                   <span className="material-symbols-outlined text-[18px]">{milestone.icon}</span>
                 </span>
                 
-                {/* Content Card */}
-                <div 
-                  className="timeline-card border border-neutral-200/50 bg-white/70 backdrop-blur-sm p-lg rounded-[28px] shadow-md hover:border-[#D8E63C] hover:shadow-[5px_5px_0px_0px_#17184B] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer opacity-0"
-                  onMouseMove={handleCardMouseMove}
-                  onMouseLeave={handleCardMouseLeave}
-                >
-                  {/* Mobile Year Badge */}
-                  <div className="timeline-year md:hidden flex items-center gap-2 mb-sm opacity-0">
-                    <span className="font-mono text-xs uppercase tracking-widest font-bold text-secondary bg-primary px-3 py-1 rounded-full shadow-sm">
-                      {milestone.year}
-                    </span>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-primary border border-primary px-2 py-0.5 rounded-full font-bold">
-                      {milestone.phase}
-                    </span>
-                  </div>
+                {/* Content Card (Outer container for GSAP transitions) */}
+                <div className="timeline-card opacity-0">
+                  {/* Inner card (Handles hover tilt, border transitions, and shadow animations) */}
+                  <div 
+                    className="border border-neutral-200/50 bg-white/70 backdrop-blur-sm p-lg rounded-[28px] shadow-md hover:border-[#D8E63C] hover:shadow-[5px_5px_0px_0px_#17184B] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                    onMouseMove={handleCardMouseMove}
+                    onMouseLeave={handleCardMouseLeave}
+                  >
+                    {/* Mobile Year Badge */}
+                    <div className="timeline-year md:hidden flex items-center gap-2 mb-sm opacity-0">
+                      <span className="font-mono text-xs uppercase tracking-widest font-bold text-secondary bg-primary px-3 py-1 rounded-full shadow-sm">
+                        {milestone.year}
+                      </span>
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-primary border border-primary px-2 py-0.5 rounded-full font-bold">
+                        {milestone.phase}
+                      </span>
+                    </div>
 
-                  <h3 className="font-display text-lg font-bold uppercase text-primary mb-xs">{milestone.title}</h3>
-                  <p className="font-sans text-body-md text-on-surface-variant leading-relaxed max-w-3xl">{milestone.desc}</p>
+                    <h3 className="font-display text-lg font-bold uppercase text-primary mb-xs">{milestone.title}</h3>
+                    <p className="font-sans text-body-md text-on-surface-variant leading-relaxed max-w-3xl">{milestone.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
