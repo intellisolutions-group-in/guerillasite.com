@@ -122,7 +122,7 @@ export default function Page() {
 <div>
 <h3 className="font-headline-md text-headline-md text-primary mb-sm group-hover:text-secondary transition-colors">Global Data Sovereignty</h3>
 <p className="font-body-md text-body-md text-on-surface-variant mb-md">
-                                Architectural patterns for enforcing geo-partitioning and row-level localization to comply with GDPR, CCPA, and strict regional data residency requirements without sacrificing global query capabilities.
+                                Architectural patterns for enforcing geo-partitioning and row-level localization to comply with strict regional data residency requirements without sacrificing global query capabilities.
                             </p>
 <div className="flex gap-md">
 <span className="gsap-stagger-item border-2 border-[#17184B] px-sm py-xs font-label-sm text-label-sm">Geo-Partitioning</span>

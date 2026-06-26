@@ -81,7 +81,7 @@ export default function Page() {
                   <span className="font-sans text-[10px] text-secondary uppercase tracking-widest font-bold">Case Study</span>
                   <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all duration-300 group-hover:translate-x-0.5">arrow_forward</span>
                 </div>
-                <span className="font-display text-sm text-primary font-bold uppercase block">Healthcare Cloud Compliance Framework</span>
+                <span className="font-display text-sm text-primary font-bold uppercase block">Healthcare Cloud Infrastructure Framework</span>
               </Link>
             </div>
           </div>
