@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import TopNavBar from "@/components/layout/TopNavBar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Page() {
   const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -27,6 +29,91 @@ export default function Page() {
     card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     card.style.transition = "transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease";
   };
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate the vertical timeline line height
+    gsap.fromTo(
+      ".timeline-progress-line",
+      { height: "0%" },
+      {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".timeline-container",
+          start: "top 60%",
+          end: "bottom 70%",
+          scrub: true,
+        },
+      }
+    );
+
+    // Animate each milestone row as it enters the viewport
+    const items = document.querySelectorAll(".timeline-item");
+    items.forEach((item) => {
+      const yearTags = item.querySelectorAll(".timeline-year");
+      const iconCircle = item.querySelector(".timeline-icon-circle");
+      const card = item.querySelector(".timeline-card");
+
+      if (yearTags.length > 0 && iconCircle && card) {
+        // Animate year tags: scale-in and fade-in
+        gsap.fromTo(
+          yearTags,
+          { scale: 0.3, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            ease: "back.out(1.5)",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Animate icon circle: scale-in and rotate
+        gsap.fromTo(
+          iconCircle,
+          { scale: 0, rotation: -60 },
+          {
+            scale: 1,
+            rotation: 0,
+            duration: 0.6,
+            ease: "back.out(1.5)",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+
+        // Animate card: slide-in from right
+        gsap.fromTo(
+          card,
+          { x: 50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 83%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <>
@@ -197,26 +284,50 @@ export default function Page() {
             <p className="font-sans text-body-md text-on-surface-variant mt-xs">Over a decade of constructing deterministic systems, scaling infrastructure, and establishing global engineering nodes.</p>
           </div>
 
-          <div className="relative border-l-[3px] border-neutral-200/60 ml-4 md:ml-8 pl-8 md:pl-12 py-4 space-y-xl z-10">
+          <div className="timeline-container relative ml-4 md:ml-8 py-4 space-y-xl z-10">
+            {/* Static background track line */}
+            <div className="absolute left-[19px] md:left-[140px] top-0 bottom-0 w-[3px] bg-neutral-200/50 z-0 rounded-full" />
+            {/* Animated progress track line */}
+            <div className="timeline-progress-line absolute left-[19px] md:left-[140px] top-0 w-[3px] bg-[#D8E63C] z-0 origin-top h-0 rounded-full shadow-[0_0_8px_#D8E63C]" />
+
             {[
-              { year: "2012", title: "Systems Foundation", desc: "GuerillaSite is established, specializing in high-availability UNIX server clustering and redundant datacenter design.", icon: "home" },
-              { year: "2015", title: "DevOps & Cloud Acceleration", desc: "Expanded DevOps operations. Built our first Kubernetes cluster automation systems and type-safe API gateways for logistics clients.", icon: "cloud_done" },
-              { year: "2018", title: "IIoT Twin Division", desc: "Launched predictive telemetry pipelines for heavy manufacturing plants, syncing over 50,000 active Edge nodes to dynamic timeseries databases.", icon: "precision_manufacturing" },
-              { year: "2024", title: "Active-Active Global Scale", desc: "Deployed synchronous multi-region, zero-data-loss databases across our network, running under sub-45ms SLA response bounds.", icon: "public" }
+              { year: "2012", phase: "PHASE 01", title: "Systems Foundation", desc: "GuerillaSite is established, specializing in high-availability UNIX server clustering and redundant datacenter design.", icon: "home" },
+              { year: "2015", phase: "PHASE 02", title: "DevOps & Cloud Acceleration", desc: "Expanded DevOps operations. Built our first Kubernetes cluster automation systems and type-safe API gateways for logistics clients.", icon: "cloud_done" },
+              { year: "2018", phase: "PHASE 03", title: "IIoT Twin Division", desc: "Launched predictive telemetry pipelines for heavy manufacturing plants, syncing over 50,000 active Edge nodes to dynamic timeseries databases.", icon: "precision_manufacturing" },
+              { year: "2024", phase: "PHASE 04", title: "Active-Active Global Scale", desc: "Deployed synchronous multi-region, zero-data-loss databases across our network, running under sub-45ms SLA response bounds.", icon: "public" }
             ].map((milestone, idx) => (
-              <div key={idx} className="relative group gsap-slide-up">
-                <span className="absolute -left-[53px] md:-left-[70px] top-3 w-10 h-10 rounded-full bg-white border border-neutral-200/50 shadow-md flex items-center justify-center text-primary group-hover:bg-secondary group-hover:text-primary group-hover:scale-105 group-hover:border-[#17184B] transition-all duration-300 z-10">
+              <div key={idx} className="timeline-item relative group pl-12 md:pl-[200px] min-h-[120px]">
+                {/* Desktop Year Label */}
+                <div className="timeline-year absolute left-0 w-[100px] text-right top-3 hidden md:flex flex-col opacity-0">
+                  <span className="font-mono text-3xl font-extrabold text-primary leading-none">
+                    {milestone.year}
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#17184B] bg-[#D8E63C] border border-[#17184B] px-1.5 py-0.5 rounded mt-1.5 w-fit ml-auto font-bold shadow-[2px_2px_0px_#17184B]">
+                    {milestone.phase}
+                  </span>
+                </div>
+
+                {/* Timeline Icon Node */}
+                <span className="timeline-icon-circle absolute left-0 md:left-[120px] top-3 w-10 h-10 rounded-full bg-white border border-neutral-200/50 shadow-md flex items-center justify-center text-primary group-hover:bg-secondary group-hover:text-primary group-hover:scale-105 group-hover:border-[#17184B] transition-all duration-300 z-10 scale-0">
                   <span className="material-symbols-outlined text-[18px]">{milestone.icon}</span>
                 </span>
                 
+                {/* Content Card */}
                 <div 
-                  className="border border-neutral-200/50 bg-white/70 backdrop-blur-sm p-lg rounded-[28px] shadow-md hover:border-[#D8E63C] hover:shadow-[5px_5px_0px_0px_#17184B] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                  className="timeline-card border border-neutral-200/50 bg-white/70 backdrop-blur-sm p-lg rounded-[28px] shadow-md hover:border-[#D8E63C] hover:shadow-[5px_5px_0px_0px_#17184B] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer opacity-0"
                   onMouseMove={handleCardMouseMove}
                   onMouseLeave={handleCardMouseLeave}
                 >
-                  <span className="font-mono text-xs uppercase tracking-widest font-bold text-secondary bg-primary px-3 py-1 rounded-full w-fit block mb-sm shadow-sm">
-                    {milestone.year}
-                  </span>
+                  {/* Mobile Year Badge */}
+                  <div className="timeline-year md:hidden flex items-center gap-2 mb-sm opacity-0">
+                    <span className="font-mono text-xs uppercase tracking-widest font-bold text-secondary bg-primary px-3 py-1 rounded-full shadow-sm">
+                      {milestone.year}
+                    </span>
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-primary border border-primary px-2 py-0.5 rounded-full font-bold">
+                      {milestone.phase}
+                    </span>
+                  </div>
+
                   <h3 className="font-display text-lg font-bold uppercase text-primary mb-xs">{milestone.title}</h3>
                   <p className="font-sans text-body-md text-on-surface-variant leading-relaxed max-w-3xl">{milestone.desc}</p>
                 </div>
