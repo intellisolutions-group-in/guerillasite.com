@@ -13,6 +13,28 @@ export function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const job = getJobBySlug(slug);
+
+  if (!job) {
+    return {};
+  }
+
+  return {
+    title: job.title,
+    description: job.summary,
+    alternates: {
+      canonical: `/careers/jobs/${job.slug}`,
+    },
+    openGraph: {
+      title: `${job.title} | Guerilla Site Careers`,
+      description: job.summary,
+      url: `https://guerillasite.com/careers/jobs/${job.slug}`,
+    },
+  };
+}
+
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
   const job = getJobBySlug(slug);
@@ -23,3 +45,4 @@ export default async function Page({ params }: PageProps) {
 
   return <JobDetailClient job={job} />;
 }
+

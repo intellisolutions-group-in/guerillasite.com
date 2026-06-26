@@ -51,8 +51,37 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "GuerillaSite | Precision Enterprise Engineering",
+  title: {
+    default: "GuerillaSite | Precision Enterprise Engineering",
+    template: "%s | GuerillaSite",
+  },
   description: "Precision software development, cloud infrastructure, AI integrations, and technical consulting.",
+  metadataBase: new URL("https://guerillasite.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "GuerillaSite | Precision Enterprise Engineering",
+    description: "Precision software development, cloud infrastructure, AI integrations, and technical consulting.",
+    url: "https://guerillasite.com",
+    siteName: "Guerilla Site",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/images/GuerillaSiteLogo-01.png",
+        width: 1200,
+        height: 630,
+        alt: "GuerillaSite Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GuerillaSite | Precision Enterprise Engineering",
+    description: "Precision software development, cloud infrastructure, AI integrations, and technical consulting.",
+    images: ["/images/GuerillaSiteLogo-01.png"],
+  },
   icons: {
     icon: [
       { url: "/images/favicon.ico", sizes: "any" },
@@ -61,6 +90,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 
 export default function RootLayout({
   children,

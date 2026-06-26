@@ -100,7 +100,7 @@ export default function Page() {
 </div>
 
 <div className="step-container hidden" id="step-2">
-<h1 className="font-headline-xl text-headline-xl mb-xl text-primary">Define the architectural scope.</h1>
+<h2 className="font-headline-xl text-headline-xl mb-xl text-primary">Define the architectural scope.</h2>
 <div className="space-y-lg">
 <fieldset>
 <legend className="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant mb-md">Primary Objective</legend>
