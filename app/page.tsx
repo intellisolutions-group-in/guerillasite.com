@@ -490,6 +490,7 @@ export default function Page() {
                       <img
                         src={offering.image}
                         alt={offering.title}
+                        loading="lazy"
                         className={`w-full h-full object-cover transition-all duration-300 ${
                           activeOffering === idx ? "grayscale-0 opacity-100" : "grayscale opacity-60"
                         }`}
@@ -550,6 +551,7 @@ export default function Page() {
                     <img 
                       src={coreOfferings[activeOffering].image} 
                       alt={coreOfferings[activeOffering].title} 
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
                     />
                   </div>
@@ -779,6 +781,7 @@ export default function Page() {
                       <img 
                         src={panel.image} 
                         alt={panel.title} 
+                        loading="lazy"
                         className="w-full h-full object-cover opacity-85 hover:scale-105 transition-all duration-700 rounded-[24px]" 
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none rounded-[24px]" />
@@ -901,6 +904,7 @@ export default function Page() {
                         <img 
                           src={vertical.image} 
                           alt={vertical.title} 
+                          loading="lazy"
                           className="w-full h-full object-cover opacity-90 hover:scale-105 transition-all duration-700 rounded-[24px]" 
                         />
                       </div>

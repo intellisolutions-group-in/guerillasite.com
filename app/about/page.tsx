@@ -39,35 +39,61 @@ export default function Page() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#D8E63C]/10 rounded-full filter blur-[120px] pointer-events-none animate-pulse duration-[10000ms] -z-10"></div>
           <div className="absolute top-1/3 left-1/3 w-[300px] h-[300px] bg-[#D3DDE7]/25 rounded-full filter blur-[90px] pointer-events-none -z-10"></div>
           
-          <div className="gsap-stagger-container grid grid-cols-1 md:grid-cols-12 gap-gutter items-center z-10 relative">
-            <div className="col-span-12 md:col-span-8 flex flex-col justify-center animate-in fade-in slide-in-from-left duration-700">
+          <div className="gsap-stagger-container grid grid-cols-1 lg:grid-cols-12 gap-huge items-center z-10 relative">
+            <div className="col-span-12 lg:col-span-7 flex flex-col justify-center animate-in fade-in slide-in-from-left duration-700">
               <p className="gsap-hero-animate font-label-sm text-label-sm text-on-surface-variant mb-md">Our Purpose</p>
-              <h1 className="gsap-hero-animate font-display text-4xl md:text-5xl lg:text-display-lg uppercase font-extrabold tracking-tight text-primary mb-lg leading-tight">
+              <h1 className="gsap-hero-animate font-display text-4xl md:text-5xl lg:text-display-lg uppercase font-extrabold tracking-tight text-primary mb-lg leading-[1.05]">
                 Engineering Reliability <br /> at Enterprise Scale.
               </h1>
               <p className="gsap-hero-animate font-sans text-body-md md:text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
                 We don't just solve problems; we architect resilient systems. GuerillaSite exists to bridge the gap between complex technical debt and streamlined, future-proof operational excellence.
               </p>
+              
+              <div className="flex flex-wrap gap-md mt-xl">
+                <Link href="/contact" className="btn-accent px-8 py-4 text-xs font-bold uppercase tracking-widest text-center shadow-md">
+                  Consult with our Architects
+                </Link>
+                <Link href="#milestones" className="btn-ghost px-8 py-4 text-xs font-bold uppercase tracking-widest text-center flex items-center gap-2 border-2 border-primary">
+                  View Milestones
+                  <span className="material-symbols-outlined text-[16px]">arrow_downward</span>
+                </Link>
+              </div>
             </div>
             
-            <div className="col-span-12 md:col-span-4 flex items-end justify-end mt-xl md:mt-0 animate-in fade-in slide-in-from-right duration-700 w-full">
+            <div className="col-span-12 lg:col-span-5 flex items-center justify-center mt-xl lg:mt-0 animate-in fade-in slide-in-from-right duration-700 w-full">
               <div 
-                className="gsap-stagger-item border border-neutral-200/50 bg-white/70 backdrop-blur-md p-lg w-full relative rounded-[32px] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden text-primary cursor-pointer"
+                className="gsap-stagger-item border-2 border-[#17184B] bg-[#17184B]/5 p-md w-full relative rounded-[32px] shadow-2xl overflow-hidden cursor-pointer backdrop-blur-sm group transition-all duration-300"
                 onMouseMove={handleCardMouseMove}
                 onMouseLeave={handleCardMouseLeave}
               >
-                {/* Soft decorative glow */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#D8E63C]/30 to-transparent rounded-full filter blur-xl pointer-events-none"></div>
-                
-                <div className="flex flex-col gap-md relative z-10">
-                  <div>
-                    <p className="font-label-sm text-label-sm text-on-surface-variant mb-xs">Founded</p>
-                    <p className="font-display text-3xl font-extrabold text-primary">2012</p>
+                {/* Decorative window headers */}
+                <div className="flex items-center gap-1.5 pb-3 border-b border-[#17184B]/10 mb-md">
+                  <span className="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#D3DDE7]"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#17184B]/30"></span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#17184B]/60 ml-2">SYSTEMS_BLUEPRINT.MD</span>
+                </div>
+
+                <div className="aspect-[16/10] relative overflow-hidden rounded-[20px] bg-neutral-900 w-full border border-[#17184B]/20 mb-md shadow-inner">
+                  <img 
+                    alt="Technical Systems Blueprint" 
+                    src="/images/about_systems_design.png"
+                    className="w-full h-full object-cover grayscale opacity-90 transition-all duration-750 group-hover:scale-102 group-hover:grayscale-0"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-60"></div>
+                  <span className="absolute bottom-md left-md bg-secondary text-primary border border-secondary px-3 py-1 font-mono text-[9px] uppercase tracking-widest rounded-full font-bold shadow-md">
+                    GEN_AI_MODEL: ACTIVE
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-sm border-t border-[#17184B]/10 pt-md mt-sm">
+                  <div className="bg-white/80 p-sm rounded-[16px] border border-[#17184B]/5 shadow-sm hover:bg-white transition-colors">
+                    <p className="font-label-sm text-[10px] uppercase text-on-surface-variant mb-xs">Founded</p>
+                    <p className="font-display text-2xl font-extrabold text-[#17184B]">2012</p>
                   </div>
-                  <div className="h-[1px] bg-neutral-200/40 w-full"></div>
-                  <div>
-                    <p className="font-label-sm text-label-sm text-on-surface-variant mb-xs">Global Reach</p>
-                    <p className="font-display text-3xl font-extrabold text-primary">42 Countries</p>
+                  <div className="bg-white/80 p-sm rounded-[16px] border border-[#17184B]/5 shadow-sm hover:bg-white transition-colors">
+                    <p className="font-label-sm text-[10px] uppercase text-on-surface-variant mb-xs">Global Reach</p>
+                    <p className="font-display text-2xl font-extrabold text-[#17184B]">42 Countries</p>
                   </div>
                 </div>
               </div>
@@ -75,46 +101,43 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Mission & Vision */}
-        <section className="w-full max-w-container-max mx-auto px-margin-desktop max-md:px-margin-mobile py-12 relative z-10">
-          <div className="gsap-stagger-container grid grid-cols-1 md:grid-cols-2 gap-gutter">
-            <div 
-              className="gsap-stagger-item flex flex-col gap-md border border-neutral-200/50 bg-white/70 backdrop-blur-md p-xl rounded-[32px] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
-              onMouseMove={handleCardMouseMove}
-              onMouseLeave={handleCardMouseLeave}
-            >
-              <div className="flex items-center gap-sm">
-                <span className="material-symbols-outlined text-primary bg-[#D8E63C]/20 border border-[#D8E63C]/30 p-2.5 rounded-full flex items-center justify-center w-11 h-11 shadow-sm">flag</span>
-                <h2 className="font-display text-xl font-bold uppercase tracking-tight text-primary">Mission</h2>
-              </div>
-              <p className="font-sans text-body-md text-on-surface-variant leading-relaxed">
-                To eliminate digital friction through precise, uncompromising engineering. We empower enterprises to operate with absolute confidence by delivering robust, scalable infrastructure and support ecosystems.
-              </p>
-            </div>
+        {/* Mission & Vision Section */}
+        <section className="w-full max-w-container-max mx-auto px-4 md:px-margin-desktop py-8 relative z-10">
+          <div className="border border-white/10 bg-[#17184B] text-[#F0EEE9] rounded-[40px] p-lg md:p-xxl shadow-2xl relative overflow-hidden">
+            {/* Ambient glows inside dark container */}
+            <div className="absolute -top-1/4 -right-1/4 w-[250px] h-[250px] bg-[#D8E63C]/10 rounded-full filter blur-[60px] pointer-events-none"></div>
             
-            <div 
-              className="gsap-stagger-item flex flex-col gap-md border border-neutral-200/50 bg-white/70 backdrop-blur-md p-xl rounded-[32px] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
-              onMouseMove={handleCardMouseMove}
-              onMouseLeave={handleCardMouseLeave}
-            >
-              <div className="flex items-center gap-sm">
-                <span className="material-symbols-outlined text-primary bg-[#D3DDE7]/35 border border-[#D3DDE7]/50 p-2.5 rounded-full flex items-center justify-center w-11 h-11 shadow-sm">visibility</span>
-                <h2 className="font-display text-xl font-bold uppercase tracking-tight text-primary">Vision</h2>
+            <div className="gsap-stagger-container grid grid-cols-1 md:grid-cols-2 gap-gutter relative z-10 divide-y md:divide-y-0 md:divide-x divide-white/10">
+              <div className="flex flex-col gap-sm pb-lg md:pb-0 md:pr-xl group cursor-pointer">
+                <div className="flex items-center gap-sm mb-xs">
+                  <span className="material-symbols-outlined text-secondary bg-white/5 border border-white/10 p-2.5 rounded-full flex items-center justify-center w-11 h-11 shadow-sm group-hover:scale-105 transition-transform duration-300">flag</span>
+                  <h2 className="font-display text-xl font-bold uppercase tracking-tight text-white">Our Mission</h2>
+                </div>
+                <p className="font-sans text-body-md text-neutral-300 leading-relaxed max-w-xl">
+                  To eliminate digital friction through precise, uncompromising engineering. We empower enterprises to operate with absolute confidence by delivering robust, scalable infrastructure and support ecosystems.
+                </p>
               </div>
-              <p className="font-sans text-body-md text-on-surface-variant leading-relaxed">
-                A technological landscape where operational downtime is obsolete, and enterprise software functions as a silent, flawless engine of continuous growth.
-              </p>
+              
+              <div className="flex flex-col gap-sm pt-lg md:pt-0 md:pl-xl group cursor-pointer">
+                <div className="flex items-center gap-sm mb-xs">
+                  <span className="material-symbols-outlined text-secondary bg-white/5 border border-white/10 p-2.5 rounded-full flex items-center justify-center w-11 h-11 shadow-sm group-hover:scale-105 transition-transform duration-300">visibility</span>
+                  <h2 className="font-display text-xl font-bold uppercase tracking-tight text-white">Our Vision</h2>
+                </div>
+                <p className="font-sans text-body-md text-neutral-300 leading-relaxed max-w-xl">
+                  A technological landscape where operational downtime is obsolete, and enterprise software functions as a silent, flawless engine of continuous growth.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Core Values */}
-        <section className="w-full max-w-container-max mx-auto px-margin-desktop max-md:px-margin-mobile py-xl md:py-xxl border border-neutral-200/40 bg-white/40 backdrop-blur-sm rounded-[48px] shadow-sm my-lg">
+        <section className="w-full max-w-container-max mx-auto px-margin-desktop max-md:px-margin-mobile py-xl md:py-xxl border border-neutral-200/45 bg-white/50 backdrop-blur-sm rounded-[48px] shadow-sm my-lg">
           <h2 className="font-display text-3xl font-extrabold uppercase tracking-tight text-primary mb-xl px-margin-mobile md:px-lg">Core Engineering Values</h2>
           
           <div className="gsap-stagger-container grid grid-cols-12 gap-gutter p-sm md:p-md auto-rows-[250px]">
             <div 
-              className="col-span-12 md:col-span-8 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+              className="col-span-12 md:col-span-8 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-[0_0_30px_rgba(216,230,60,0.12)] hover:border-[#D8E63C]/40 hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
             >
@@ -126,7 +149,7 @@ export default function Page() {
             </div>
 
             <div 
-              className="col-span-12 md:col-span-4 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+              className="col-span-12 md:col-span-4 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-[0_0_30px_rgba(216,230,60,0.12)] hover:border-[#D8E63C]/40 hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
             >
@@ -138,7 +161,7 @@ export default function Page() {
             </div>
 
             <div 
-              className="col-span-12 md:col-span-4 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+              className="col-span-12 md:col-span-4 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-[0_0_30px_rgba(216,230,60,0.12)] hover:border-[#D8E63C]/40 hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
             >
@@ -150,7 +173,7 @@ export default function Page() {
             </div>
 
             <div 
-              className="col-span-12 md:col-span-8 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+              className="col-span-12 md:col-span-8 border border-neutral-200/50 p-xl flex flex-col justify-between bg-white/80 backdrop-blur-sm text-primary rounded-[32px] shadow-md hover:shadow-[0_0_30px_rgba(216,230,60,0.12)] hover:border-[#D8E63C]/40 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group cursor-pointer"
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
             >
@@ -165,7 +188,7 @@ export default function Page() {
         </section>
 
         {/* Engineering Milestones Timeline */}
-        <section className="w-full max-w-container-max mx-auto px-margin-desktop max-md:px-margin-mobile py-16 relative">
+        <section className="w-full max-w-container-max mx-auto px-margin-desktop max-md:px-margin-mobile py-16 relative" id="milestones">
           <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-tr from-[#D8E63C]/5 to-[#D8E63C]/5 rounded-full filter blur-xl pointer-events-none z-0"></div>
           
           <div className="max-w-3xl mb-xxl gsap-slide-up relative z-10">
@@ -182,12 +205,12 @@ export default function Page() {
               { year: "2024", title: "Active-Active Global Scale", desc: "Deployed synchronous multi-region, zero-data-loss databases across our network, running under sub-45ms SLA response bounds.", icon: "public" }
             ].map((milestone, idx) => (
               <div key={idx} className="relative group gsap-slide-up">
-                <span className="absolute -left-[53px] md:-left-[70px] top-3 w-10 h-10 rounded-full bg-white border border-neutral-200/50 shadow-md flex items-center justify-center text-primary group-hover:bg-secondary group-hover:text-primary transition-all duration-300 z-10">
+                <span className="absolute -left-[53px] md:-left-[70px] top-3 w-10 h-10 rounded-full bg-white border border-neutral-200/50 shadow-md flex items-center justify-center text-primary group-hover:bg-secondary group-hover:text-primary group-hover:scale-105 group-hover:border-[#17184B] transition-all duration-300 z-10">
                   <span className="material-symbols-outlined text-[18px]">{milestone.icon}</span>
                 </span>
                 
                 <div 
-                  className="border border-neutral-200/50 bg-white/70 backdrop-blur-sm p-lg rounded-[28px] shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  className="border border-neutral-200/50 bg-white/70 backdrop-blur-sm p-lg rounded-[28px] shadow-md hover:border-[#D8E63C] hover:shadow-[5px_5px_0px_0px_#17184B] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                   onMouseMove={handleCardMouseMove}
                   onMouseLeave={handleCardMouseLeave}
                 >
@@ -209,7 +232,7 @@ export default function Page() {
           
           <div className="max-w-2xl relative z-10 gsap-slide-up flex flex-col gap-sm">
             <h2 className="font-display text-3xl md:text-4xl font-extrabold uppercase tracking-tight leading-tight text-white">Ready to re-architect your operations?</h2>
-            <p className="font-sans text-body-md text-neutral-300">Engage with our senior engineering team to discuss your infrastructure challenges.</p>
+            <p className="font-sans text-body-md text-neutral-350">Engage with our senior engineering team to discuss your infrastructure challenges.</p>
           </div>
           
           <div className="relative z-10 whitespace-nowrap shrink-0 gsap-scale-in">

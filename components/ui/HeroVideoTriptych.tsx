@@ -19,9 +19,11 @@ const HERO_VIDEOS = [
 interface VideoColumnProps {
   initialVideo: string;
   allVideos: string[];
+  inView: boolean;
+  isColHidden?: boolean;
 }
 
-function VideoColumn({ initialVideo, allVideos }: VideoColumnProps) {
+function VideoColumn({ initialVideo, allVideos, inView, isColHidden = false }: VideoColumnProps) {
   const [videoA, setVideoA] = useState(initialVideo);
   const [videoB, setVideoB] = useState(() => {
     const remaining = allVideos.filter((v) => v !== initialVideo);
@@ -36,39 +38,47 @@ function VideoColumn({ initialVideo, allVideos }: VideoColumnProps) {
   const handleEnded = () => {
     if (activePlayer === "A") {
       setActivePlayer("B");
-      if (playerBRef.current) {
+      if (playerBRef.current && inView && !isColHidden) {
         playerBRef.current.play().catch((err) => {
           console.warn("Standby player B failed to play:", err);
         });
       }
-      // Prepare a new random video for A (different from the one that just started playing on B)
       const nextForA = allVideos.filter((v) => v !== videoB);
       const randSrc = nextForA[Math.floor(Math.random() * nextForA.length)];
       setVideoA(randSrc);
     } else {
       setActivePlayer("A");
-      if (playerARef.current) {
+      if (playerARef.current && inView && !isColHidden) {
         playerARef.current.play().catch((err) => {
           console.warn("Standby player A failed to play:", err);
         });
       }
-      // Prepare a new random video for B (different from the one that just started playing on A)
       const nextForB = allVideos.filter((v) => v !== videoA);
       const randSrc = nextForB[Math.floor(Math.random() * nextForB.length)];
       setVideoB(randSrc);
     }
   };
 
-  // Ensure the active player plays when state switches or files mount
+  // Play/pause the active player based on viewport visibility and column rendering
   useEffect(() => {
     const active = activePlayer === "A" ? playerARef.current : playerBRef.current;
-    if (active && active.paused && (videoA || videoB)) {
-      active.play().catch((err) => {
-        // Log low-priority warning for autoplays (which should be allowed as they are muted)
-        console.debug("Video playback failed/interrupted on state change:", err);
-      });
+    const inactive = activePlayer === "A" ? playerBRef.current : playerARef.current;
+
+    // The standby player must always remain paused to free hardware decoding units
+    if (inactive) {
+      inactive.pause();
     }
-  }, [activePlayer, videoA, videoB]);
+
+    if (active) {
+      if (inView && !isColHidden) {
+        active.play().catch((err) => {
+          console.debug("Video playback failed/interrupted on state update:", err);
+        });
+      } else {
+        active.pause();
+      }
+    }
+  }, [activePlayer, inView, isColHidden, videoA, videoB]);
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-black rounded-[24px] md:rounded-[36px] shadow-inner">
@@ -97,10 +107,21 @@ function VideoColumn({ initialVideo, allVideos }: VideoColumnProps) {
 }
 
 export default function HeroVideoTriptych() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
   const [initialSlice, setInitialSlice] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Shuffle lists on client mount to ensure distinct random starting videos for the columns
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       const shuffled = [...HERO_VIDEOS].sort(() => 0.5 - Math.random());
       setInitialSlice([shuffled[0], shuffled[1], shuffled[2]]);
@@ -108,15 +129,47 @@ export default function HeroVideoTriptych() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => {
+      observer.unobserve(el);
+    };
+  }, []);
+
   if (initialSlice.length < 3) {
-    return <div className="absolute inset-0 bg-[#EBE8E1]" />;
+    return <div ref={containerRef} className="absolute inset-0 bg-[#EBE8E1]" />;
   }
 
   return (
-    <div className="absolute inset-0 grid grid-cols-3 gap-2 md:gap-4 p-2 md:p-4 h-full w-full z-0 select-none">
-      <VideoColumn initialVideo={initialSlice[0]} allVideos={HERO_VIDEOS} />
-      <VideoColumn initialVideo={initialSlice[1]} allVideos={HERO_VIDEOS} />
-      <VideoColumn initialVideo={initialSlice[2]} allVideos={HERO_VIDEOS} />
+    <div
+      ref={containerRef}
+      className="absolute inset-0 grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 p-2 md:p-4 h-full w-full z-0 select-none"
+    >
+      <VideoColumn initialVideo={initialSlice[0]} allVideos={HERO_VIDEOS} inView={inView} />
+      <div className="hidden md:block h-full w-full relative">
+        <VideoColumn
+          initialVideo={initialSlice[1]}
+          allVideos={HERO_VIDEOS}
+          inView={inView}
+          isColHidden={isMobile}
+        />
+      </div>
+      <div className="hidden md:block h-full w-full relative">
+        <VideoColumn
+          initialVideo={initialSlice[2]}
+          allVideos={HERO_VIDEOS}
+          inView={inView}
+          isColHidden={isMobile}
+        />
+      </div>
     </div>
   );
 }
