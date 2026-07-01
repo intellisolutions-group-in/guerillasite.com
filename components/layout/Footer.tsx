@@ -30,16 +30,7 @@ export default function Footer() {
             High-performance systems engineering, cloud architecture optimization, and zero-trust security integrations.
           </p>
 
-          {/* Live System Status - High-Tech Dev Theme */}
-          <div className="mt-md flex items-center gap-2 bg-black/40 border-2 border-[#D8E63C] rounded-full px-3.5 py-1.5 w-fit shadow-[2px_2px_0px_#D8E63C]">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D8E63C] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D8E63C]"></span>
-            </span>
-            <span className="font-sans text-[10px] uppercase tracking-wider text-[#D8E63C] font-semibold">
-              Systems Nominal // 99.99% SLA
-            </span>
-          </div>
+
         </div>
 
         {/* Solutions Link Column */}
@@ -141,15 +132,15 @@ export default function Footer() {
                 <rect x="0" y="0" width="900" height="130" fill="url(#fadeMask)" />
               </mask>
             </defs>
-            <text 
-              x="50%" 
-              y="100" 
+            <text
+              x="50%"
+              y="100"
               textAnchor="middle"
               textLength="860"
               lengthAdjust="spacingAndGlyphs"
-              fill="none" 
-              stroke="url(#textGradient)" 
-              strokeWidth="2.5" 
+              fill="none"
+              stroke="url(#textGradient)"
+              strokeWidth="2.5"
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontWeight: 900,

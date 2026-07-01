@@ -28,17 +28,14 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
                 {post.category}
               </span>
               <span className="font-mono text-[10px] uppercase text-[#17184B]/60 px-3 py-1 bg-white/70 border border-[#17184B]/10 font-semibold rounded-full">
-                {post.date}
-              </span>
-              <span className="font-mono text-[10px] uppercase text-[#17184B]/60 px-3 py-1 bg-white/70 border border-[#17184B]/10 font-semibold rounded-full">
                 {post.readTime}
               </span>
             </div>
-            
+
             <h1 className="font-display text-3xl md:text-5xl lg:text-[52px] text-[#17184B] font-extrabold uppercase tracking-tight leading-[1.05] mt-sm">
               {post.title}
             </h1>
-            
+
             <p className="font-sans text-md md:text-body-lg text-[#17184B]/70 leading-relaxed max-w-3xl mt-sm">
               {post.desc}
             </p>
@@ -47,7 +44,7 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
           {/* Article Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-xl max-w-[800px] mx-auto w-full items-start">
             <article className="lg:col-span-12 flex flex-col gap-lg text-[#17184B] leading-relaxed font-body-lg text-body-lg">
-              
+
               {/* Introduction */}
               <p className="font-sans text-body-lg text-[#17184B] leading-relaxed font-bold border-l-4 border-[#D8E63C] pl-md">
                 {post.introduction}
@@ -102,24 +99,7 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
                 }
               })}
 
-              {/* Author Bio Panel */}
-              <div className="mt-xl border-t border-[#17184B]/10 pt-xl flex flex-col md:flex-row gap-lg items-center bg-[#EBE8E1]/40 p-lg rounded-[32px] border border-white/20">
-                <div className="w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-[#17184B]">
-                  <img
-                    src={post.author.image}
-                    alt={post.author.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-col gap-xs text-center md:text-left">
-                  <span className="font-mono text-[10px] uppercase text-[#17184B]/60 tracking-wider">Written By</span>
-                  <h4 className="font-display text-lg font-bold uppercase text-[#17184B] leading-none">{post.author.name}</h4>
-                  <span className="font-sans text-xs text-[#17184B]/70 font-semibold">{post.author.role}</span>
-                  <p className="font-sans text-xs text-[#17184B]/80 mt-sm leading-relaxed max-w-xl">
-                    {post.author.bio}
-                  </p>
-                </div>
-              </div>
+
 
               {/* Back to Blog Button */}
               <div className="mt-lg flex justify-center">
